@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ULPF Nexus — Universal Log Intelligence</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">N</div>
+        <div>
+          <div class="brand-name">ULPF <span>NEXUS</span></div>
+          <div class="brand-sub">Universal Log Pre-processing Framework</div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <span class="command-tag">NEXUS CONTROL PLANE</span>
+        <span class="airgap"><i></i> AIR-GAPPED</span>
+        <span id="aiStatus" class="status-pill">AI: OFFLINE-LOCAL</span>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="section-label">CONTROL PLANE</div>
+        <button class="nav active" data-page="overview">◉ <span>Overview</span></button>
+        <button class="nav nav-featured" data-page="democc">◆ <span>SIH Demo Command Center</span><b>DEMO</b></button>
+        <button class="nav" data-page="pipeline">▶ <span>Pipeline Control</span></button>
+        <button class="nav" data-page="ingest">↧ <span>Ingest Logs</span></button>
+        <button class="nav" data-page="onboarding">⌘ <span>Source Onboarding</span></button>
+        <button class="nav" data-page="dna">◎ <span>Log DNA</span></button>
+        <button class="nav" data-page="parsers">⟲ <span>Parser Registry</span></button>
+        <button class="nav" data-page="mapper">✦ <span>AI Mapper</span></button>
+        <button class="nav" data-page="airouting">⇢ <span>AI Routing</span></button>
+        <button class="nav" data-page="aimodel">⚙ <span>GPT-OSS Control</span></button>
+        <button class="nav" data-page="contextai">⌬ <span>AI Context Lab</span></button>
+        <button class="nav" data-page="contract">⇥ <span>Contract Compiler</span></button>
+        <button class="nav" data-page="semantic">◇ <span>Semantic Graph</span></button>
+        <button class="nav" data-page="sandbox">▣ <span>Parser Sandbox</span></button>
+        <button class="nav" data-page="lineage">⌁ <span>Event Lineage</span></button>
+        <button class="nav" data-page="mutation">Δ <span>Mutation Watch</span></button>
+        <button class="nav" data-page="evolution">⇄ <span>Evolution Loop</span></button>
+        <button class="nav" data-page="evolutioncc">◈ <span>Evolution Command</span></button>
+        <button class="nav" data-page="observability">◉ <span>Command Center</span></button>
+        <button class="nav" data-page="connectors">⇌ <span>Connectors</span></button>
+        <button class="nav" data-page="storage">▤ <span>Storage & Analytics</span></button>
+        <button class="nav" data-page="forensics">⌘ <span>Forensic Time Machine</span></button>
+        <button class="nav" data-page="model">⬡ <span>Unified Model</span></button>
+        <button class="nav" data-page="investigation">⌕ <span>Investigation</span></button>
+        <button class="nav" data-page="threathunt">◉ <span>Threat Hunting</span></button>
+        <button class="nav" data-page="detections">⚠ <span>Detection & Alerts</span></button>
+        <button class="nav" data-page="correlation">⛓ <span>Correlation Incidents</span></button>
+        <button class="nav" data-page="graph">✺ <span>Investigation Graph</span></button>
+        <button class="nav" data-page="risk">◉ <span>Risk Intelligence</span></button>
+        <button class="nav" data-page="riskqueue">☷ <span>Analyst Risk Queue</span></button>
+        <button class="nav" data-page="response">⚡ <span>Response & Containment</span></button>
+        <button class="nav" data-page="entities">◌ <span>Entity Intelligence</span></button>
+        <button class="nav" data-page="orchestrator">⚡ <span>Security Orchestrator</span></button>
+        <button class="nav" data-page="hardening">🛡 <span>System Hardening</span></button>
+        <button class="nav" data-page="airgap">🧰 <span>Air-Gap Operations</span></button>
+        <div class="sidebar-footer">
+          <div class="mini-title">LOSSLESS CORE</div>
+          <div class="mini-value">SHA-256</div>
+          <div class="mini-caption">Raw events are preserved before normalization.</div>
+        </div>
+      </aside>
+
+      <main class="content">
+
+        <section id="orchestrator" class="page">
+          <div class="page-head">
+            <div><div class="eyebrow">DETECT → INVESTIGATE → SCORE → RECOMMEND</div><h2>Security Orchestrator</h2><p>One local control path connects detections, correlations, risk prioritization, response recommendations and simulation. Human approval remains mandatory.</p></div>
+            <div class="button-row"><span id="orchLive" class="badge good">LOCAL CONTROL PLANE</span><button class="ghost" onclick="loadOrchestratorState()">REFRESH</button></div>
+          </div>
+          <div id="orchestratorMetrics" class="metric-grid"></div>
+          <div class="two-col">
+            <div class="panel form-panel">
+              <label>Analyst<input id="orchAnalyst" value="SIH-Analyst" /></label>
+              <label>Detection scan limit<input id="orchDetectionLimit" type="number" value="5000" min="100" max="10000" /></label>
+              <label>Correlation scan limit<input id="orchCorrelationLimit" type="number" value="10000" min="100" max="20000" /></label>
+              <label class="checkline"><input id="orchAttackRefresh" type="checkbox" checked /> Refresh attack paths</label>
+              <label class="checkline"><input id="orchAutoResponse" type="checkbox" checked /> Auto-create high/critical response recommendations</label>
+              <button class="primary" onclick="runSecurityOrchestrator()">RUN COMPLETE SECURITY FLOW</button>
+              <div id="orchestratorResult"></div>
+            </div>
+            <div class="panel">
+              <div class="panel-title">CONTROL CHAIN</div>
+              <div class="flow-strip" style="margin-top:14px"><span>DETECT</span><span>→</span><span>CORRELATE</span><span>→</span><span>RISK</span><span>→</span><span>PRIORITIZE</span><span>→</span><span>RECOMMEND</span><span>→</span><span>HUMAN APPROVAL</span><span>→</span><span>SIMULATE</span></div>
+              <div id="orchestratorLatest" class="event-list" style="margin-top:14px"></div>
+            </div>
+          </div>
+          <div class="panel" style="margin-top:16px">
+            <div class="panel-head"><div><div class="panel-title">LIVE ORCHESTRATION FEED</div><div class="panel-sub">Events emitted by the local security control plane</div></div><span id="orchFeedState" class="badge good">LISTENING</span></div>
+            <div id="orchestratorFeed" class="event-list"></div>
+          </div>
+        </section>
+
+        <section id="entities" class="page">
+          <div class="page-head"><div><div class="eyebrow">ENTITY INTELLIGENCE & ATTACK-PATH ANALYSIS</div><h2>Entity Intelligence</h2><p>Reconstruct persistent relationships between IPs, users, hosts, services and log sources from the unified event model.</p></div><div class="button-row"><button class="ghost" onclick="rebuildEntities()">REBUILD GRAPH</button><button class="ghost" onclick="buildAttackPaths()">ANALYZE ATTACK PATHS</button></div></div>
+          <div id="entityMetrics" class="metric-grid"></div>
+          <div class="two-col">
+            <div class="panel"><div class="panel-title">TOP ENTITIES</div><div class="panel-sub">High-observation entities become reusable investigation pivots.</div><div id="entityList" class="event-list"></div></div>
+            <div class="panel"><div class="panel-title">ATTACK PATH CANDIDATES</div><div class="panel-sub">Explainable local sequences are derived from persisted normalized events.</div><div id="attackPathList" class="event-list"></div></div>
+          </div>
+          <div class="panel" style="margin-top:16px"><div class="panel-title">ENTITY DETAIL</div><div class="panel-sub">Select an entity to inspect its relationships and observations.</div><pre id="entityDetail" class="code-block">Select an entity.</pre></div>
+          <div id="entityResult"></div>
+        </section>
+
+        <section id="risk" class="page">
+          <div class="page-head"><div><div class="eyebrow">EXPLAINABLE LOCAL RISK INTELLIGENCE</div><h2>Risk Intelligence</h2><p>Deterministic, air-gapped risk scoring built from correlation severity, evidence quality, mutation state, mapping confidence and active alerts.</p></div><button class="ghost" onclick="loadRiskCenter()">REFRESH</button></div>
+          <div id="riskSummary" class="metric-grid"></div>
+          <div class="two-col">
+            <div class="panel"><div class="panel-title">ASSESS AN INCIDENT</div><div class="panel-sub">Creates a persisted explainable risk assessment.</div><label>Incident ID<input id="riskIncidentId" placeholder="CORR-..." /></label><button class="primary" onclick="assessIncidentRisk()">ASSESS INCIDENT</button><div id="riskResult"></div></div>
+            <div class="panel"><div class="panel-title">RECENT ASSESSMENTS</div><div class="panel-sub">Click an assessment to inspect its evidence factors.</div><div id="riskRecent" class="event-list"></div></div>
+          </div>
+          <div class="panel" style="margin-top:16px"><div class="panel-title">RISK METHODOLOGY</div><div class="panel-sub">No external threat intelligence is required. Every score is reproducible from local evidence.</div><pre class="code-block">Incident severity → 25%
+Correlation score → 25%
+Evidence breadth → 10%
+Related alert pressure → 15%
+Mutation exposure → 10%
+Mapping uncertainty → 15%
+
+LOW 0–29.9 · MEDIUM 30–59.9 · HIGH 60–79.9 · CRITICAL 80–100</pre></div>
+        </section>
+
+        <section id="response" class="page">
+          <div class="page-head"><div><div class="eyebrow">AUTOMATED RESPONSE & CONTAINMENT SIMULATION</div><h2>Response & Containment</h2><p>Explainable response recommendations with a mandatory human approval gate. All actions are simulation-only; Nexus never invokes external controls.</p></div><div class="button-row"><button class="ghost" onclick="loadResponseCenter()">REFRESH</button></div></div>
+          <div class="two-col">
+            <div class="panel form-panel"><div class="panel-title">GENERATE RECOMMENDATION</div><div class="panel-sub">Use an event, incident, or attack path already present in Nexus evidence.</div><label>Entity Type<select id="responseEntityType"><option value="event">event</option><option value="incident">incident</option><option value="attack_path">attack_path</option></select></label><label>Entity ID<input id="responseEntityId" placeholder="EVT-... / CORR-... / PATH-..." /></label><label>Analyst<input id="responseAnalyst" value="SIH-Analyst" /></label><button class="primary" onclick="generateResponseRecommendation()">GENERATE</button><div id="responseResult"></div></div>
+            <div class="panel"><div class="panel-title">RESPONSE SAFETY POLICY</div><pre class="code-block">1. Nexus generates a recommendation from local evidence.
+2. Recommendation remains PENDING.
+3. Human analyst must APPROVE or REJECT.
+4. Execution endpoint is SIMULATION ONLY.
+5. No firewall, endpoint, IAM or network control is invoked.
+
+Example actions:
+• isolate_host
+• block_source
+• disable_account
+• collect_forensics</pre></div>
+          </div>
+          <div class="panel" style="margin-top:16px"><div class="panel-head"><div><div class="panel-title">PENDING / RECENT RECOMMENDATIONS</div><div class="panel-sub">Complete audit trail from recommendation to human decision to simulated execution.</div></div></div><div id="responseRecommendations" class="event-list"></div></div>
+          <div class="panel" style="margin-top:16px"><div class="panel-title">SIMULATED EXECUTIONS</div><div id="responseExecutions" class="event-list"></div></div>
+        </section>
+
+        <section id="riskqueue" class="page">
+          <div class="page-head"><div><div class="eyebrow">AUTOMATED RISK PROPAGATION & ANALYST PRIORITIZATION</div><h2>Analyst Risk Queue</h2><p>Detection and correlation signals automatically propagate into a prioritized local response queue with explainable SLA targets.</p></div><div class="button-row"><button class="ghost" onclick="propagateRisk()">PROPAGATE NOW</button><button class="ghost" onclick="loadRiskQueue()">REFRESH</button></div></div>
+          <div id="riskPrioritySummary" class="metric-grid"></div>
+          <div class="two-col">
+            <div class="panel"><div class="panel-head"><div><div class="panel-title">PRIORITIZED ANALYST QUEUE</div><div class="panel-sub">P1 is highest priority. Scores combine local risk, severity, evidence and confidence.</div></div></div><div id="riskQueueList" class="event-list"></div></div>
+            <div class="panel form-panel"><div class="panel-title">QUEUE ACTION</div><label>Queue ID<input id="riskQueueId" placeholder="RQ-..." /></label><label>Status<select id="riskQueueStatus"><option>acknowledged</option><option>resolved</option><option>dismissed</option><option>open</option></select></label><label>Analyst<input id="riskQueueAnalyst" value="SIH-Analyst" /></label><button class="primary" onclick="updateRiskQueue()">UPDATE QUEUE ITEM</button><div id="riskQueueResult"></div><pre class="code-block">P1 CRITICAL → 15 min SLA
+P2 HIGH → 60 min SLA
+P3 MEDIUM → 4 hr SLA
+P4 LOW → 24 hr SLA</pre></div>
+          </div>
+        </section>
+
+        <section id="model" class="page">
+          <div class="page-head"><div><div class="eyebrow">ONE VERSIONED CONTROL MODEL</div><h2>Unified Model</h2><p>Schema, parser, contract and event lineage share explicit version references and content hashes.</p></div><button class="ghost" onclick="loadUnifiedModel()">REFRESH</button></div>
+          <div class="panel"><div class="panel-title">ACTIVE TRANSLATION ARTIFACTS</div><div class="panel-sub">The artifact is the join point between schema, parser and contract.</div><div id="artifactList" class="event-list"></div></div>
+          <div class="panel" style="margin-top:16px"><div class="panel-title">MODEL REGISTRY</div><div class="panel-sub">Unified versions available to processing and forensic replay.</div><pre id="modelRegistry" class="code-block">Loading…</pre></div>
+        </section>
+
+        <section id="overview" class="page active-page">
+          <div class="hero">
+            <div>
+              <div class="eyebrow">FROM UNKNOWN LOGS TO TRUSTED INTELLIGENCE</div>
+              <h1>Normalize everything.<br /><span>Lose nothing.</span></h1>
+              <p>Air-gapped ingestion, structural Log DNA, safe parser evolution and forensic lineage in one control plane.</p>
+            </div>
+            <div class="hero-card">
+              <div class="hero-card-label">CURRENT PIPELINE</div>
+              <div class="pipeline"><b>INGEST</b><span>→</span><b>DNA</b><span>→</span><b>PARSE</b><span>→</span><b>NORMALIZE</b><span>→</span><b>PROVE</b></div>
+            </div>
+          </div>
+          <div class="signature-banner">
+            <div class="signature-copy">
+              <div class="signature-kicker">SIH 2026 · NTRO · UNIVERSAL LOG PRE-PROCESSING</div>
+              <div class="signature-title">Unknown → Trusted <span>without losing a single bit.</span></div>
+              <div class="signature-text">A lossless, air-gapped log intelligence framework with safe parser evolution, semantic validation, forensic lineage and security analytics.</div>
+            </div>
+            <div class="signature-actions">
+              <button class="primary" onclick="document.querySelector('[data-page="democc"]').click()">RUN SIH DEMO</button>
+              <button class="ghost" onclick="document.querySelector('[data-page="pipeline"]').click()">OPEN PIPELINE</button>
+            </div>
+          </div>
+          <div id="metrics" class="metric-grid"></div>
+          <div class="two-col">
+            <div class="panel">
+              <div class="panel-head"><div><div class="panel-title">LIVE EVENT STREAM</div><div class="panel-sub">Most recent normalized events</div></div><button class="ghost" onclick="loadEvents()">REFRESH</button></div>
+              <div id="events" class="event-list"></div>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><div><div class="panel-title">TRUST MODEL</div><div class="panel-sub">Confidence-aware processing plane</div></div></div>
+              <div class="trust-row"><span>≥ 99%</span><strong>Deterministic fast path</strong><em>trusted</em></div>
+              <div class="trust-row"><span>90–99%</span><strong>Lightweight local model</strong><em>reviewable</em></div>
+              <div class="trust-row"><span>&lt; 90%</span><strong>Local AI mapping</strong><em>candidate</em></div>
+              <div class="trust-row"><span>Conflict</span><strong>Quarantine + evidence</strong><em>blocked</em></div>
+              <div class="quote">“AI proposes. Validation decides.”<br/><small id="aiModeCaption">Local model adapter ready; heuristic fallback active.</small></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="pipeline" class="page">
+          <div class="page-head"><div><div class="eyebrow">PRODUCTION EVENT CONTROL PLANE</div><h2>Pipeline Control</h2><p>One auditable path for idempotent processing, quarantine review and stage-level telemetry.</p></div></div>
+          <div class="two-col">
+            <div class="panel form-panel">
+              <label>Source name<input id="pipelineSource" value="demo-firewall" /></label>
+              <label>Idempotency key (optional)<input id="pipelineKey" value="demo-001" /></label>
+              <label>Raw event<textarea id="pipelineLog">action=accept src_ip=10.20.1.7 dst_ip=10.20.2.9 source_port=51543 destination_port=443 protocol=tcp username=analyst</textarea></label>
+              <button class="primary" onclick="processPipeline()">RUN END-TO-END PIPELINE</button>
+              <div id="pipelineResult"></div>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><div><div class="panel-title">QUARANTINE QUEUE</div><div class="panel-sub">Analyst release or reject decisions</div></div><button class="ghost" onclick="loadQuarantine()">REFRESH</button></div>
+              <div id="quarantinePanel" class="event-list"></div>
+            </div>
+          </div>
+          <div class="panel" style="margin-top:16px"><div class="panel-head"><div><div class="panel-title">PIPELINE RUN AUDIT</div><div class="panel-sub">Stage completion and processing latency</div></div><button class="ghost" onclick="loadPipelineRuns()">REFRESH</button></div><div id="pipelineRuns" class="event-list"></div></div>
+        </section>
+
+        <section id="ingest" class="page">
+          <div class="page-head"><div><div class="eyebrow">INGESTION GATEWAY</div><h2>Feed ULPF Nexus a raw event</h2><p>Nothing is discarded. Raw input is hashed, retained and linked to every downstream transformation.</p></div></div>
+          <div class="panel form-panel">
+            <label>Source name<input id="source" value="demo-firewall" /></label>
+            <label>Raw log<textarea id="rawLog">2026-09-04T10:24:18Z action=accept src=10.2.4.18 dst=172.16.8.4 sport=51543 dport=443 proto=tcp user=alok</textarea></label>
+            <button class="primary" onclick="ingest()">INGEST & NORMALIZE</button>
+            <div id="ingestResult"></div>
+          </div>
+        </section>
+
+        <section id="onboarding" class="page">
+          <div class="page-head"><div><div class="eyebrow">PLUG-AND-PLAY SOURCE ONBOARDING</div><h2>Unknown → Known</h2><p>Give Nexus a few samples. It fingerprints the source, searches approved parser families and recommends either binding or safe candidate creation.</p></div></div>
+          <div class="two-col">
+            <div class="panel form-panel">
+              <label>Source name<input id="onboardSource" value="new-firewall-01" /></label>
+              <label>Expected vendor (optional)<input id="onboardVendor" placeholder="auto-detect when blank" /></label>
+              <label>Sample logs<textarea id="onboardSamples">src_addr=10.40.1.7 dst_addr=10.40.2.9 source_port=51822 destination_port=443 decision=accept transport=tcp
+src_addr=10.40.1.9 dst_addr=10.40.2.12 source_port=51543 destination_port=22 decision=deny transport=tcp</textarea></label>
+              <button class="primary" onclick="analyzeOnboarding()">DISCOVER SOURCE</button>
+              <div id="onboardingResult"></div>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><div><div class="panel-title">ONBOARDING QUEUE</div><div class="panel-sub">Recent discovery sessions and recommendations</div></div><button class="ghost" onclick="loadOnboarding()">REFRESH</button></div>
+              <div id="onboardingQueue" class="event-list"></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="dna" class="page">
+          <div class="page-head"><div><div class="eyebrow">STRUCTURAL FINGERPRINT</div><h2>Log DNA</h2><p>Fingerprint structure before semantics so unknown sources can be compared without trusting labels.</p></div></div>
+          <div class="panel"><div id="dnaPanel" class="dna-grid"><div class="empty">Ingest an event to see its Log DNA fingerprint.</div></div></div>
+        </section>
+
+        <section id="parsers" class="page">
+          <div class="page-head"><div><div class="eyebrow">TRANSLATION GENOME</div><h2>Parser Registry</h2><p>Approved parser contracts become deterministic production paths.</p></div></div>
+          <div id="parsersPanel" class="parser-grid"></div>
+        </section>
+
+        <section id="mapper" class="page">
+          <div class="page-head"><div><div class="eyebrow">LOCAL-ONLY SEMANTIC MAPPING</div><h2>AI Mapper</h2><p>The mapper proposes canonical fields with evidence. Conflicts are surfaced instead of silently normalized.</p></div></div>
+          <div class="two-col">
+            <div class="panel form-panel">
+              <label>Unknown raw log<textarea id="mapLog">src_addr=10.40.1.7 dst_addr=10.40.2.9 source_port=51822 destination_port=443 decision=accept transport=tcp username=analyst</textarea></label>
+              <button class="primary" onclick="runMapper()">ANALYZE LOCALLY</button>
+              <div id="mapperResult"></div>
+            </div>
+            <div class="panel form-panel">
+              <label>Candidate parser name<input id="candidateName" value="discovered-firewall" /></label>
+              <label>Replay samples<textarea id="candidateSamples">src_addr=10.40.1.7 dst_addr=10.40.2.9 source_port=51822 destination_port=443 decision=accept transport=tcp
+src_addr=10.40.1.9 dst_addr=10.40.2.12 source_port=51543 destination_port=22 decision=deny transport=tcp</textarea></label>
+              <button class="primary" onclick="createCandidate()">CREATE PARSER CANDIDATE</button>
+              <div id="candidateResult"></div>
+            </div>
+          </div>
+        </section>
+
+
+        <section id="airouting" class="page">
+          <div class="page-head"><div><div class="eyebrow">CONFIDENCE-AWARE LOCAL INTELLIGENCE</div><h2>AI Routing Control</h2><p>Deterministic parsing stays on the fast path. Local semantic intelligence handles uncertainty. GPT-OSS is invoked only when local evidence is insufficient.</p></div><button class="ghost" onclick="loadAIRouting()">REFRESH</button></div>
+          <div class="metric-grid" id="aiRouteMetrics"></div>
+          <div class="two-col">
+            <div class="panel form-panel">
+              <label>Test raw event<textarea id="aiRouteLog">src=10.60.1.7 dst=10.60.2.8 dport=443 action=accept proto=tcp</textarea></label>
+              <button class="primary" onclick="testAIRouting()">RUN ROUTER</button>
+              <div id="aiRouteResult"></div>
+            </div>
+            <div class="panel"><div class="panel-head"><div><div class="panel-title">ROUTING POLICY</div><div class="panel-sub">Evidence-driven escalation</div></div></div><div class="guard-list"><div>≥ 99% · deterministic fast path</div><div>90–99% · lightweight local semantic path</div><div>&lt; 90% · GPT-OSS local escalation</div><div>semantic conflict · quarantine before normalization</div><div>Every decision is persisted with hash + evidence.</div></div></div>
+          </div>
+          <div class="panel" style="margin-top:16px"><div class="panel-head"><div><div class="panel-title">RECENT AI DECISIONS</div><div class="panel-sub">Auditable local routing history</div></div></div><div id="aiDecisionList" class="event-list"></div></div>
+        </section>
+
+        <section id="aimodel" class="page">
+          <div class="page-head"><div><div class="eyebrow">LOCAL MODEL INFERENCE PLANE</div><h2>GPT-OSS Control</h2><p>Live local inference is optional. When enabled, Nexus validates model output against the canonical schema before it can influence parser evolution.</p></div><button class="ghost" onclick="loadGPTOSS()">CHECK LOCAL MODEL</button></div>
+          <div class="metric-grid" id="gptMetrics"></div>
+          <div class="two-col">
+            <div class="panel form-panel">
+              <label>Test raw event<textarea id="gptLog">src_addr=10.60.1.7 dst_addr=10.60.2.8 source_port=51543 destination_port=443 decision=accept transport=tcp username=analyst vendor_field=edge-firewall</textarea></label>
+              <button class="primary" onclick="runGPTOSSMap()">RUN LOCAL GPT-OSS</button>
+              <div id="gptResult"></div>
+            </div>
+            <div class="panel"><div class="panel-head"><div><div class="panel-title">SAFETY CONTRACT</div><div class="panel-sub">Model output is not trusted directly</div></div></div><div class="guard-list"><div>01 · Local endpoint only</div><div>02 · Canonical-target allowlist</div><div>03 · Confidence normalized to 0..1</div><div>04 · Unknown fields preserved</div><div>05 · Conflicts force review/quarantine</div><div>06 · Evidence summary is persisted; hidden reasoning is not stored</div></div></div>
+          </div>
+          <div class="panel" style="margin-top:16px"><div class="panel-head"><div><div class="panel-title">RECENT MAPPING EVIDENCE</div><div class="panel-sub">Replayable AI-assisted decisions</div></div><button class="ghost" onclick="loadGPTOSS()">REFRESH</button></div><div id="gptEvidence" class="event-list"></div></div>
+        </section>
+
+        <section id="contextai" class="page">
+          <div class="page-head"><div><div class="eyebrow">LOCAL RETRIEVAL + PARSER-AWARE MAPPING</div><h2>AI Context Lab</h2><p>Before AI proposes a mapping, Nexus retrieves local schema evidence, alias relationships and known parser contracts. Nothing leaves the air-gapped boundary.</p></div><button class="ghost" onclick="loadAIContextStatus()">REFRESH</button></div>
+          <div class="metric-grid" id="contextMetrics"></div>
+          <div class="two-col">
+            <div class="panel form-panel">
+              <label>Unknown raw event<textarea id="contextLog">sourceAddress=10.71.1.7 destinationAddress=10.71.2.8 source_port=51543 action=accept protocol=tcp username=analyst edge_vendor_field=gw-7</textarea></label>
+              <button class="primary" onclick="runContextMap()">RETRIEVE + MAP</button>
+              <div id="contextResult"></div>
+            </div>
+            <div class="panel"><div class="panel-head"><div><div class="panel-title">RETRIEVED LOCAL EVIDENCE</div><div class="panel-sub">Top semantic matches and parser context</div></div></div><div id="contextEvidence" class="event-list"></div></div>
+          </div>
+          <div class="panel" style="margin-top:16px"><div class="panel-head"><div><div class="panel-title">EMBEDDING / RETRIEVAL TELEMETRY</div><div class="panel-sub">Local model availability and recent retrievals</div></div></div><div id="retrievalHistory" class="event-list"></div></div>
+        </section>
+
+        <section id="contract" class="page">
+          <div class="page-head"><div><div class="eyebrow">STRUCTURED PARSER CONTRACT COMPILER</div><h2>Translation Contract Compiler</h2><p>Convert local evidence into a versioned parser contract. AI may propose mappings, but the contract remains schema-validated, lossless and sandbox-gated.</p></div></div>
+          <div class="two-col">
+            <div class="panel form-panel">
+              <label>Source name<input id="contractSource" value="new-firewall-contract" /></label>
+              <label>Contract name<input id="contractName" value="new-firewall-parser" /></label>
+              <label>Raw samples<textarea id="contractSamples">src_addr=10.50.1.7 dst_addr=10.50.2.9 source_port=51543 destination_port=443 decision=accept transport=tcp vendor_code=gw-7
+src_addr=10.50.1.8 dst_addr=10.50.2.10 source_port=51544 destination_port=22 decision=deny transport=tcp vendor_code=gw-8</textarea></label>
+              <button class="primary" onclick="compileContract()">COMPILE TRANSLATION CONTRACT</button>
+              <div id="contractResult"></div>
+              <div class="divider"></div>
+              <label>Contract ID<input id="execContractId" placeholder="CTR-…" /></label>
+              <label>Runtime log<textarea id="execContractRaw">src_addr=10.50.1.7 dst_addr=10.50.2.9 source_port=51543 destination_port=443 decision=accept vendor_code=gw-7</textarea></label>
+              <button class="ghost" onclick="executeContract()">EXECUTE CONTRACT</button>
+              <div id="contractExecResult"></div>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><div><div class="panel-title">COMPILED CONTRACT</div><div class="panel-sub">Detection → extraction → mapping → validation → safety</div></div><button class="ghost" onclick="loadContracts()">REFRESH</button></div>
+              <div id="contractPanel" class="event-list"><div class="empty">Compile a sample set to create a versioned contract.</div></div>
+            </div>
+          </div>
+          <div class="panel" style="margin-top:16px"><div class="panel-head"><div><div class="panel-title">CONTRACT HISTORY</div><div class="panel-sub">Persistent contract versions and hashes</div></div></div><div id="contractHistory" class="event-list"></div></div>
+          <div class="panel" style="margin-top:16px"><div class="panel-head"><div><div class="panel-title">VERSION IMPACT</div><div class="panel-sub">Replay identical samples against two contract versions</div></div></div><div class="two-col"><div class="form-panel"><label>Parser ID<input id="compareParserId" placeholder="parser id" /></label><label>Version A<input id="compareVersionA" type="number" value="1" /></label><label>Version B<input id="compareVersionB" type="number" value="2" /></label><label>Samples<textarea id="compareSamples">src=10.1.1.1 dst=10.1.1.2 sport=1234 dport=443 action=accept proto=tcp vendor_magic=x1</textarea></label><button class="ghost" onclick="compareContracts()">COMPARE VERSIONS</button></div><div id="compareResult" class="event-list"><div class="empty">Select a parser with multiple contract versions.</div></div></div></div>
+        </section>
+
+        <section id="semantic" class="page">
+          <div class="page-head"><div><div class="eyebrow">EVIDENCE-BACKED FIELD INTELLIGENCE</div><h2>Semantic Knowledge Graph</h2><p>See why raw field names map to canonical ULPF fields. Competing meanings are quarantined instead of silently merged.</p></div></div>
+          <div class="two-col">
+            <div class="panel form-panel">
+              <label>Analyze an unknown event<textarea id="semanticLog">sourceAddress=10.44.1.7 destinationAddress=10.44.2.9 source_port=51543 action=accept protocol=tcp username=analyst</textarea></label>
+              <button class="primary" onclick="analyzeSemantic()">RUN SEMANTIC ANALYSIS</button>
+              <div id="semanticResult"></div>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><div><div class="panel-title">GRAPH EDGES</div><div class="panel-sub">Observed alias → canonical relationships</div></div><button class="ghost" onclick="loadSemanticGraph()">REFRESH</button></div>
+              <div id="semanticGraph" class="event-list"></div>
+            </div>
+          </div>
+          <div class="panel" style="margin-top:16px"><div class="panel-head"><div><div class="panel-title">QUARANTINED SEMANTIC CONFLICTS</div><div class="panel-sub">Evidence gaps are visible and auditable</div></div><button class="ghost" onclick="loadSemanticConflicts()">REFRESH</button></div><div id="semanticConflicts" class="event-list"></div></div>
+        </section>
+
+        <section id="sandbox" class="page">
+          <div class="page-head"><div><div class="eyebrow">SAFE EVOLUTION</div><h2>Parser Sandbox</h2><p>Replay samples before a parser candidate can touch the production path.</p></div></div>
+          <div class="panel form-panel">
+            <textarea id="sandboxLogs">action=accept src=10.0.0.1 dst=10.0.0.2 sport=1234 dport=443 proto=tcp
+action=deny src=10.0.0.8 dst=10.0.0.9 sport=5312 dport=22 proto=tcp user=root</textarea>
+            <button class="primary" onclick="runSandbox()">RUN REPLAY</button>
+            <div id="sandboxResult"></div>
+          </div>
+        </section>
+
+        <section id="lineage" class="page">
+          <div class="page-head"><div><div class="eyebrow">FORENSIC TIME MACHINE</div><h2>Event Lineage</h2><p>Trace a normalized event back to the exact raw bytes, parser and mapping evidence.</p></div></div>
+          <div class="panel"><div id="lineagePanel" class="lineage"><div class="empty">Ingest an event to inspect lineage.</div></div></div>
+        </section>
+
+        <section id="evolution" class="page">
+          <div class="page-head"><div><div class="eyebrow">SELF-EVOLVING PARSER CONTROL</div><h2>Evolution Loop</h2><p>Unknown sources become deterministic parsers only after evidence, replay and human approval.</p></div></div>
+          <div class="panel form-panel"><div id="evolutionFlow" class="evolution-flow"><div class="evo-node">UNKNOWN LOG</div><span>→</span><div class="evo-node">LOG DNA</div><span>→</span><div class="evo-node">LOCAL AI</div><span>→</span><div class="evo-node">CANDIDATE</div><span>→</span><div class="evo-node">SANDBOX</div><span>→</span><div class="evo-node">APPROVE</div><span>→</span><div class="evo-node">FAST PATH</div></div>
+            <div id="evolutionMetrics" class="metric-grid"></div><div class="two-col"><div><div class="panel-head"><div><div class="panel-title">REGISTERED SOURCES</div><div class="panel-sub">Source-to-parser bindings learned locally</div></div><button class="ghost" onclick="loadSources()">REFRESH</button></div><div id="sourcesPanel" class="event-list"></div></div><div><div class="panel-head"><div><div class="panel-title">EVOLUTION GUARDRAILS</div><div class="panel-sub">Promotion gates</div></div></div><div class="guard-list"><div>01 · AI proposes mapping</div><div>02 · Candidate stored as versioned Genome</div><div>03 · Historical replay measures coverage</div><div>04 · Conflicts or regression block release</div><div>05 · Human approval binds source → parser</div></div></div></div></div>
+        </section>
+
+        <section id="evolutioncc" class="page">
+          <div class="page-head"><div><div class="eyebrow">UNKNOWN → KNOWN → TRUSTED</div><h2>Evolution Command Center</h2><p>Run the complete guarded evolution workflow: DNA, mutation, AI routing, candidate parser, sandbox and release decision.</p></div></div>
+          <div class="two-col">
+            <div class="panel form-panel">
+              <label>Source name<input id="evoSource" value="unknown-firewall-02" /></label>
+              <label>Expected vendor<input id="evoVendor" placeholder="optional" /></label>
+              <label>Candidate parser name<input id="evoCandidate" value="auto-discovered-firewall" /></label>
+              <label>Sample logs<textarea id="evoSamples">src_addr=10.50.1.7 dst_addr=10.50.2.9 source_port=51001 destination_port=443 decision=accept transport=tcp username=analyst
+src_addr=10.50.1.8 dst_addr=10.50.2.9 source_port=51002 destination_port=443 decision=deny transport=tcp username=analyst</textarea></label>
+              <button class="primary" onclick="runEvolution()">RUN GUARDED EVOLUTION</button>
+              <div id="evoRunResult"></div>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><div><div class="panel-title">CONTROL CENTER TELEMETRY</div><div class="panel-sub">Local audit of every evolution attempt</div></div><button class="ghost" onclick="loadEvolutionCC()">REFRESH</button></div>
+              <div id="evoCCMetrics" class="metric-grid" style="padding:18px"></div>
+              <div id="evoCCRecent" class="event-list"></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="mutation" class="page">
+          <div class="page-head"><div><div class="eyebrow">PARSER MUTATION WATCH</div><h2>Format drift & regression</h2><p>Detect when a familiar source starts looking structurally different.</p></div></div>
+          <div class="two-col">
+            <div class="panel"><div class="panel-head"><div><div class="panel-title">LOG DNA MUTATION</div><div class="panel-sub">Latest two events</div></div><button class="ghost" onclick="loadMutation()">CHECK</button></div><div id="mutationPanel" class="empty">Run a check after ingesting two events.</div><div id="mutationDetails"></div></div>
+            <div class="panel"><div class="panel-head"><div><div class="panel-title">REGRESSION GUARD</div><div class="panel-sub">Historical replay keeps versions honest</div></div></div><div class="regression-demo"><span>v1</span><div class="bar"><i style="width:99.7%"></i></div><b>99.7% coverage</b></div><div class="regression-demo"><span>v2</span><div class="bar"><i style="width:87%"></i></div><b>87.0% coverage</b></div><div class="reg-note">A coverage drop is a release blocker, not a silent degradation.</div></div>
+          </div>
+        </section>
+      <section id="observability" class="page">
+          <div class="page-head"><div><div class="eyebrow">REAL-TIME OPERATIONS</div><h2>Nexus Command Center</h2><p>Operational health for ingestion, normalization, parser confidence, quarantine pressure and connector flow. Telemetry is computed locally for air-gapped operation.</p></div><button class="ghost" onclick="loadObservability()">REFRESH</button></div>
+          <div class="metric-grid" id="obsMetrics"></div>
+          <div class="two-col">
+            <div class="panel"><div class="panel-head"><div><div class="panel-title">PROCESSING HEALTH</div><div class="panel-sub">Live throughput and latency window</div></div><span class="badge good" id="obsHeartbeat">LOCAL</span></div>
+              <div class="obs-grid" id="obsHealth"></div>
+            </div>
+            <div class="panel"><div class="panel-head"><div><div class="panel-title">ROUTING MIX</div><div class="panel-sub">Trusted, review and quarantine decisions</div></div></div><div id="obsStatusBars" class="status-bars"></div></div>
+          </div>
+          <div class="two-col" style="margin-top:16px">
+            <div class="panel"><div class="panel-head"><div><div class="panel-title">PIPELINE STAGE LATENCY</div><div class="panel-sub">Average milliseconds by processing stage</div></div></div><div id="obsStages" class="event-list"></div></div>
+            <div class="panel"><div class="panel-head"><div><div class="panel-title">PARSER CONFIDENCE</div><div class="panel-sub">Production parser routing quality</div></div></div><div id="obsParsers" class="event-list"></div></div>
+          </div>
+      </section>
+
+      <section id="storage" class="page">
+          <div class="page-head"><div><div class="eyebrow">ENTERPRISE STORAGE & ANALYTICS PLANE</div><h2>Storage & Analytics</h2><p>Search normalized events, inspect local storage health, review retention posture and keep a clean path to PostgreSQL, OpenSearch or ClickHouse deployments.</p></div><button class="ghost" onclick="loadStorage()">REFRESH</button></div>
+          <div class="metric-grid" id="storageMetrics"></div>
+          <div class="two-col">
+            <div class="panel form-panel">
+              <label>Search query<input id="storageQ" placeholder="IP, source, vendor, parser or raw text" /></label>
+              <label>Status<select id="storageStatus"><option value="">Any status</option><option value="trusted">Trusted</option><option value="review">Review</option><option value="quarantine">Quarantine</option></select></label>
+              <label>Source<input id="storageSource" placeholder="firewall-gateway-01" /></label>
+              <button class="primary" onclick="searchStorage()">SEARCH EVENTS</button>
+              <div id="storageResult" class="event-list"></div>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><div><div class="panel-title">ANALYTICS WINDOW</div><div class="panel-sub">Local event statistics by source and format</div></div></div>
+              <div id="storageBreakdown" class="event-list"></div>
+            </div>
+          </div>
+          <div class="two-col" style="margin-top:16px">
+            <div class="panel">
+              <div class="panel-head"><div><div class="panel-title">RETENTION & FORENSICS</div><div class="panel-sub">Archive before delete; raw SHA-256 remains verifiable</div></div><button class="ghost" onclick="applyRetention(true)">DRY RUN</button></div>
+              <div id="retentionPanel" class="event-list"></div>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><div><div class="panel-title">STORAGE ADAPTERS</div><div class="panel-sub">Embedded today, enterprise-ready by contract</div></div></div>
+              <div id="storageAdapters" class="event-list"></div>
+            </div>
+          </div>
+      </section>
+
+
+      <section id="forensics" class="page">
+        <div class="page-head"><div><div class="eyebrow">FORENSIC TIME MACHINE</div><h2>Event Reconstruction</h2><p>Reconstruct raw → parser → semantic decision → normalization → proof from persisted local evidence.</p></div><button class="ghost" onclick="loadForensics()">REFRESH</button></div>
+        <div class="two-col">
+          <div class="panel form-panel">
+            <label>Event ID<input id="forensicEventId" placeholder="Select an event from the table" /></label>
+            <button class="primary" onclick="inspectForensic()">INSPECT TRACE</button>
+            <div id="forensicTrace" class="lineage"><div class="empty">Select an event to inspect the complete trace.</div></div>
+          </div>
+          <div class="panel"><div class="panel-head"><div><div class="panel-title">RECENT EVENTS</div><div class="panel-sub">Click an event to load its forensic trace</div></div></div><div id="forensicEvents" class="event-list"></div></div>
+        </div>
+      </section>
+
+      <section id="investigation" class="page">
+        <div class="page-head"><div><div class="eyebrow">UNIFIED FORENSIC INVESTIGATION WORKSPACE</div><h2>Investigation</h2><p>Search one event and inspect its raw payload, normalized result, model versions, AI evidence, mutation history, evolution history and integrity proof.</p></div><button class="ghost" onclick="loadInvestigationSearch()">REFRESH</button></div>
+        <div class="two-col">
+          <div class="panel form-panel">
+            <label>Search<input id="investigationQ" placeholder="event ID, IP, source, SHA-256, parser…" /></label>
+            <label>Status<select id="investigationStatus"><option value="">Any status</option><option value="trusted">Trusted</option><option value="review">Review</option><option value="quarantine">Quarantine</option></select></label>
+            <label>Source<input id="investigationSource" placeholder="firewall-gateway-01" /></label>
+            <button class="primary" onclick="loadInvestigationSearch()">SEARCH INVESTIGATIONS</button>
+            <div id="investigationResults" class="event-list"></div>
+          </div>
+          <div class="panel form-panel">
+            <label>Event ID<input id="investigationEventId" placeholder="Select an event" /></label>
+            <div class="button-row"><button class="primary" onclick="inspectInvestigation()">OPEN INVESTIGATION</button><button class="ghost" onclick="verifyInvestigation()">VERIFY INTEGRITY</button></div>
+            <div id="investigationBundle" class="lineage"><div class="empty">Select an event to load the complete investigation bundle.</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="threathunt" class="page">
+        <div class="page-head"><div><div class="eyebrow">UNIFIED SCHEMA SECURITY ANALYTICS</div><h2>Threat Hunting</h2><p>Search normalized events, inspect source-to-destination relationships, detect bursts and reconstruct local security timelines without external enrichment.</p></div><button class="ghost" onclick="loadThreatSummary()">REFRESH</button></div>
+        <div class="two-col">
+          <div class="panel form-panel">
+            <label>Source<input id="huntSource" placeholder="firewall-gateway-01" /></label>
+            <label>Source IP<input id="huntSrcIp" placeholder="10.0.0.10" /></label>
+            <label>Destination IP<input id="huntDstIp" placeholder="10.0.0.20" /></label>
+            <label>Action<input id="huntAction" placeholder="accept" /></label>
+            <label>Text contains<input id="huntText" placeholder="blocked / suspicious / keyword" /></label>
+            <button class="primary" onclick="runThreatHunt()">RUN HUNT</button>
+            <div id="huntResult" style="margin-top:12px"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><div><div class="panel-title">HUNT SUMMARY</div><div class="panel-sub">Local analytics over the unified event model</div></div></div>
+            <div id="huntSummary" class="metric-grid"></div>
+            <div id="huntEdges" class="event-list" style="margin-top:12px"></div>
+          </div>
+        </div>
+        <div class="two-col" style="margin-top:16px">
+          <div class="panel"><div class="panel-head"><div><div class="panel-title">CORRELATION GRAPH</div><div class="panel-sub">Top source → destination relationships and burst signals</div></div><button class="ghost" onclick="loadThreatCorrelation()">REFRESH</button></div><div id="huntCorrelation" class="event-list"></div></div>
+          <div class="panel"><div class="panel-head"><div><div class="panel-title">SECURITY TIMELINE</div><div class="panel-sub">Chronological normalized event sequence</div></div></div><div id="huntTimeline" class="event-list"></div></div>
+        </div>
+      </section>
+
+
+      <section id="detections" class="page">
+        <div class="page-head"><div><div class="eyebrow">DETECTION & INVESTIGATION RULE ENGINE</div><h2>Detection & Alerts</h2><p>Saved local rules turn threat-hunt signals into explainable alerts with thresholds, windows, evidence and analyst lifecycle controls.</p></div><div class="button-row"><button class="ghost" onclick="runDetectionEngine()">RUN ENGINE</button><button class="ghost" onclick="loadDetectionCenter()">REFRESH</button></div></div>
+        <div class="metric-grid" id="detectionMetrics"></div>
+        <div class="two-col">
+          <div class="panel form-panel">
+            <label>Rule name<input id="ruleName" value="Repeated blocked source" /></label>
+            <label>Severity<select id="ruleSeverity"><option>medium</option><option>high</option><option>critical</option><option>low</option></select></label>
+            <label>Threshold<input id="ruleThreshold" type="number" value="3" min="1" /></label>
+            <label>Window seconds<input id="ruleWindow" type="number" value="300" min="1" /></label>
+            <label>Field<select id="ruleField"><option value="event.action">event.action</option><option value="source.ip">source.ip</option><option value="destination.ip">destination.ip</option><option value="network.protocol">network.protocol</option></select></label>
+            <label>Operator<select id="ruleOperator"><option value="eq">equals</option><option value="contains">contains</option><option value="exists">exists</option></select></label>
+            <label>Value<input id="ruleValue" value="deny" /></label>
+            <button class="primary" onclick="createDetectionRule()">CREATE RULE</button>
+            <div id="ruleResult" style="margin-top:12px"></div>
+          </div>
+          <div class="panel"><div class="panel-head"><div><div class="panel-title">ACTIVE RULES</div><div class="panel-sub">Versioned rules evaluated locally against normalized events.</div></div></div><div id="ruleList" class="event-list"></div></div>
+        </div>
+        <div class="panel" style="margin-top:16px"><div class="panel-head"><div><div class="panel-title">ANALYST ALERT QUEUE</div><div class="panel-sub">Open, acknowledge, resolve or dismiss detections with persisted evidence.</div></div></div><div id="alertList" class="event-list"></div></div>
+      </section>
+
+      <section id="correlation" class="page">
+        <div class="page-head"><div><div class="eyebrow">MULTI-EVENT CORRELATION ENGINE</div><h2>Correlation Incidents</h2><p>Detect ordered attack-like sequences across normalized events and preserve the complete evidence chain as one incident.</p></div><div class="button-row"><button class="ghost" onclick="runCorrelationEngine()">RUN CORRELATION</button><button class="ghost" onclick="loadCorrelationCenter()">REFRESH</button></div></div>
+        <div class="metric-grid" id="corrMetrics"></div>
+        <div class="two-col">
+          <div class="panel form-panel">
+            <label>Rule name<input id="corrName" value="Failed login → successful login → sensitive access" /></label>
+            <label>Severity<select id="corrSeverity"><option>high</option><option>critical</option><option>medium</option><option>low</option></select></label>
+            <label>Window seconds<input id="corrWindow" type="number" value="900" min="1" /></label>
+            <label>Group by<select id="corrGroup"><option value="source">source</option><option value="source.ip">source.ip</option><option value=""></option></select></label>
+            <label>Step 1<input id="corrStep1" value="deny" /></label>
+            <label>Step 2<input id="corrStep2" value="accept" /></label>
+            <label>Step 3<input id="corrStep3" value="8080" /></label>
+            <button class="primary" onclick="createCorrelationRule()">CREATE SEQUENCE RULE</button>
+            <div class="muted" style="margin-top:8px">Demo semantics: Step 1/2 match <b>event.action</b>; Step 3 matches <b>destination.port</b>.</div>
+            <div id="corrResult" style="margin-top:12px"></div>
+          </div>
+          <div class="panel"><div class="panel-head"><div><div class="panel-title">CORRELATION RULES</div><div class="panel-sub">Ordered, versioned and evaluated locally.</div></div></div><div id="corrRules" class="event-list"></div></div>
+        </div>
+        <div class="panel" style="margin-top:16px"><div class="panel-head"><div><div class="panel-title">INCIDENT QUEUE</div><div class="panel-sub">One incident groups the complete sequence and its evidence.</div></div></div><div id="corrIncidents" class="event-list"></div></div>
+      </section>
+
+      <section id="graph" class="page">
+          <div class="page-head"><div><div class="eyebrow">INCIDENT INVESTIGATION GRAPH · v3.5</div><h2>Live Attack Reconstruction</h2><p>Interactive attack-path visualization with live event streaming, ordered progression, entity pivots, risk overlays and single-click event reconstruction.</p></div><div class="button-row"><button class="ghost" onclick="loadAttackPathCatalog()">LOAD PATHS</button><button class="ghost" onclick="loadInvestigationGraph()">REFRESH</button><button class="primary" onclick="fitAttackGraph()">FIT GRAPH</button></div></div>
+          <div class="metric-grid" id="graphMetrics"></div>
+          <div class="attack-toolbar panel">
+            <div class="attack-toolbar-row">
+              <label>ATTACK PATH<select id="attackPathSelect" onchange="loadSelectedAttackPath()"><option value="">Select a path…</option></select></label>
+              <label>VIEW<input id="attackGraphView" value="Interactive · local evidence" readonly /></label><span id="liveAttackState" class="badge good">LIVE CONNECTING…</span><span class="metric-inline">EVENTS/MIN <b id="liveEventsRate">—</b></span>
+              <button class="ghost" onclick="resetAttackGraphView()">RESET VIEW</button>
+            </div>
+          </div>
+          <div class="attack-grid" style="margin-top:16px">
+            <div class="panel attack-panel">
+              <div class="panel-head"><div><div class="panel-title">ATTACK-PATH GRAPH</div><div class="panel-sub">Drag canvas to pan · wheel to zoom · click any node to inspect evidence</div></div><span id="attackGraphState" class="badge good">READY</span></div>
+              <div id="attackGraphViewport" class="attack-graph-viewport">
+                <svg id="attackGraphSvg" class="attack-graph-svg" viewBox="0 0 1000 620" role="img" aria-label="Interactive attack path graph"></svg>
+              </div>
+              <div class="graph-legend"><span><i class="legend-dot path"></i>Attack Path</span><span><i class="legend-dot event"></i>Event</span><span><i class="legend-dot entity"></i>Entity</span><span><i class="legend-dot action"></i>Action</span><span><i class="legend-dot risk"></i>Risk</span></div>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><div><div class="panel-title">SELECTED EVIDENCE</div><div class="panel-sub">Node detail + event reconstruction</div></div></div>
+              <div id="graphSelectedNode" class="graph-selected-node"><div class="empty">Select a node.</div></div>
+              <div class="panel-head" style="border-top:1px solid var(--border)"><div><div class="panel-title">ATTACK TIMELINE</div><div class="panel-sub">Ordered event progression</div></div></div>
+              <div id="attackTimeline" class="attack-timeline"></div>
+            </div>
+          </div>
+        </section>
+
+
+              <section id="airgap" class="page">
+          <div class="page-head"><div><div class="eyebrow">DISCONNECTED DEPLOYMENT & OPERATIONS</div><h2>Air-Gap Operations</h2><p>Validate local readiness, move configuration between disconnected installations, create verified database backups, and inspect deployment posture.</p></div><div class="button-row"><button class="ghost" onclick="loadAirgap()">REFRESH</button><button class="ghost" onclick="runAirgapSelfTest()">SELF-TEST</button></div></div>
+          <div id="airgapMetrics" class="metric-grid"></div>
+          <div class="two-col">
+            <div class="panel"><div class="panel-title">DEPLOYMENT READINESS</div><div class="panel-sub">Local startup checks and deployment policy state.</div><pre id="airgapChecks" class="code-block">Loading…</pre></div>
+            <div class="panel form-panel"><div class="panel-title">OFFLINE CONFIGURATION</div><div class="panel-sub">Secrets are excluded by default.</div><button class="primary" onclick="exportAirgapConfig()">EXPORT CONFIG JSON</button><label>Import JSON<input id="airgapImportJson" placeholder='{"ULPF_AI_MODE":"heuristic"}' /></label><button class="ghost" onclick="importAirgapConfig()">IMPORT CONFIG</button><div id="airgapConfigResult"></div></div>
+          </div>
+          <div class="two-col" style="margin-top:16px">
+            <div class="panel form-panel"><div class="panel-title">DATABASE BACKUP</div><div class="panel-sub">Creates a SQLite online backup and stores its SHA-256 digest.</div><button class="primary" onclick="createAirgapBackup()">CREATE VERIFIED BACKUP</button><div id="airgapBackupResult"></div></div>
+            <div class="panel"><div class="panel-title">ENVIRONMENT VALIDATION</div><div class="panel-sub">Flags development defaults before a deployment.</div><pre id="airgapEnv" class="code-block">Login required.</pre></div>
+          </div>
+        </section>
+
+
+<section id="democc" class="page">
+  <div class="page-head">
+    <div><div class="eyebrow">SIH 2026 · ONE-CLICK DEMONSTRATION</div><h2>Nexus Demo Command Center</h2><p>Run the complete ULPF Nexus story from unknown log discovery to trusted normalization, security detection, attack reconstruction, risk prioritization, response recommendation and forensic evidence.</p></div>
+    <div class="button-row"><span class="badge good">AIR-GAPPED</span><span class="badge good">SIMULATION ONLY</span></div>
+  </div>
+  <div class="metric-grid" id="demoMetrics"></div>
+  <div class="panel" style="margin-bottom:16px">
+    <div class="panel-head"><div><div class="panel-title">DEMO SCENARIO</div><div class="panel-sub">Use the same repeatable local scenario for judge walkthroughs.</div></div><span id="demoRunStatus" class="badge good">READY</span></div>
+    <div class="form-panel" style="grid-template-columns:1fr 220px auto;align-items:end">
+      <label>Scenario<select id="demoScenario"><option value="full_sih_demo">FULL SIH DEMO</option><option value="attack_reconstruction">ATTACK RECONSTRUCTION</option><option value="parser_evolution">PARSER EVOLUTION</option></select></label>
+      <label>Analyst<input id="demoAnalyst" value="SIH-Analyst" /></label>
+      <button class="primary" onclick="runDemoScenario()">RUN COMPLETE DEMO</button>
+    </div>
+  </div>
+  <div class="two-col">
+    <div class="panel"><div class="panel-title" style="padding:18px 18px 0">LIVE DEMO FLOW</div><div class="panel-sub" style="padding:4px 18px 14px">The sequence below is populated from the actual run record.</div><div id="demoFlow" class="timeline"></div></div>
+    <div class="panel"><div class="panel-title" style="padding:18px 18px 0">RUN RESULT</div><div class="panel-sub" style="padding:4px 18px 14px">Judge-facing evidence summary.</div><pre id="demoResult" class="code-block">Click RUN COMPLETE DEMO.</pre></div>
+  </div>
+  <div class="panel" style="margin-top:16px"><div class="panel-title" style="padding:18px 18px 0">RECENT DEMO RUNS</div><div id="demoRuns" class="event-list"></div></div>
+</section>
+
+<section id="hardening" class="page">
+        <div class="page-head"><div><div class="eyebrow">ENTERPRISE HARDENING & AUDIT</div><h2>System Hardening</h2><p>Health, readiness, role-based access, configuration controls and a tamper-evident SHA-256 audit chain. No external control systems are invoked.</p></div><div class="button-row"><span id="hardeningStatus" class="badge good">LOCAL</span><button class="ghost" onclick="loadHardening()">REFRESH</button></div></div>
+        <div id="hardeningMetrics" class="metric-grid"></div>
+        <div class="two-col">
+          <div class="panel form-panel">
+            <div class="panel-title">LOCAL LOGIN</div><div class="panel-sub">Use the bootstrap admin credentials configured in the backend environment.</div>
+            <label>Username<input id="hardUser" value="admin" /></label>
+            <label>Password<input id="hardPass" type="password" value="change-me" /></label>
+            <button class="primary" onclick="hardeningLogin()">LOGIN</button>
+            <div id="hardAuthResult"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-title">COMPONENT HEALTH</div><div class="panel-sub">Database, event store, authentication store and audit chain.</div>
+            <div id="hardComponents" class="event-list"></div>
+          </div>
+        </div>
+        <div class="panel" style="margin-top:16px">
+          <div class="panel-head"><div><div class="panel-title">TAMPER-EVIDENT AUDIT</div><div class="panel-sub">Every administrative action is chained to the previous SHA-256 audit entry.</div></div><div class="button-row"><button class="ghost" onclick="verifyAuditChain()">VERIFY CHAIN</button><button class="ghost" onclick="loadAuditLog()">LOAD LOG</button></div></div>
+          <div id="hardAudit" class="event-list"></div>
+        </div>
+        <div class="panel" style="margin-top:16px">
+          <div class="panel-title">SECURITY POSTURE</div>
+          <pre class="code-block">AIR-GAPPED: TRUE
+RESPONSE EXECUTION: SIMULATION-ONLY
+AUDIT INTEGRITY: SHA-256 CHAIN
+AUTH ROLES: ADMIN · ANALYST · VIEWER
+RAW LOGS: NEVER WRITTEN TO APPLICATION LOGS
+REQUEST TRACE: X-REQUEST-ID</pre>
+        </div>
+      </section>
+
+        <section id="connectors" class="page">
+          <div class="page-head"><div><div class="eyebrow">ENTERPRISE CONNECTOR PLANE</div><h2>Source Connectors</h2><p>Adapters terminate at one stable receive contract. New vendors can be added without changing parsing, semantic intelligence or lineage.</p></div></div>
+          <div class="two-col">
+            <div class="panel form-panel">
+              <label>Connector name<input id="connName" value="Firewall HTTP Gateway" /></label>
+              <label>Type<select id="connType"><option value="http">HTTP Push</option><option value="syslog_udp">Syslog UDP</option><option value="syslog_tcp">Syslog TCP</option><option value="file_tail">File Tail</option><option value="kafka">Kafka-compatible</option><option value="redis_streams">Redis Streams-compatible</option><option value="nats">NATS-compatible</option></select></label>
+              <label>Logical source<input id="connSource" value="firewall-gateway-01" /></label>
+              <label>Configuration JSON<textarea id="connConfig">{"endpoint":"http://127.0.0.1:9000/events"}</textarea></label>
+              <button class="primary" onclick="createConnector()">REGISTER CONNECTOR</button>
+              <div id="connectorResult"></div>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><div><div class="panel-title">CONNECTOR HEALTH</div><div class="panel-sub">Adapter status, volume and last heartbeat</div></div><button class="ghost" onclick="loadConnectors()">REFRESH</button></div>
+              <div id="connectorList" class="event-list"></div>
+            </div>
+          </div>
+          <div class="panel" style="margin-top:16px"><div class="panel-head"><div><div class="panel-title">UNIFIED RECEIVE CONTRACT</div><div class="panel-sub">Every adapter feeds the same air-gapped processing plane</div></div></div><div class="result">CONNECTOR → RECEIVE CONTRACT → STREAM / QUEUE → FORMAT DETECTION → LOG DNA → SEMANTIC GATE → NORMALIZE → LOSSLESS PROOF → LINEAGE</div></div>
+        </section>
+        <section id="stream-panel-v12" class="panel" style="margin:24px 0"><div class="section-head"><div><h2>Stream Control</h2><p>Partitioned, ordered and replayable event stream with consumer checkpoints.</p></div><button class="ghost" onclick="loadStreamTelemetry()">REFRESH</button></div><div class="metric-grid"><div class="metric"><span>Partitions</span><strong id="s-partitions">—</strong></div><div class="metric"><span>Total</span><strong id="s-total">—</strong></div><div class="metric"><span>Available</span><strong id="s-available">—</strong></div><div class="metric"><span>Processed</span><strong id="s-processed">—</strong></div></div><div id="streamPartitionPanel" class="event-list" style="margin-top:12px"></div></section>
+<section class="panel" style="margin:24px 0"><div class="section-head"><div><h2>Queue Control</h2><p>Persistent local workers, backpressure, retries and dead-letter telemetry.</p></div></div><div class="metric-grid"><div class="metric"><span>Depth</span><strong id="q-depth">—</strong></div><div class="metric"><span>Workers</span><strong id="q-workers">—</strong></div><div class="metric"><span>Processed</span><strong id="q-processed">—</strong></div><div class="metric"><span>DLQ</span><strong id="q-dlq">—</strong></div></div><div class="muted" id="q-status" style="margin-top:12px">Loading queue telemetry…</div></section></main>
+    </div>
+  </div>
+  <script src="/app.js"></script>
+</body>
+</html>
